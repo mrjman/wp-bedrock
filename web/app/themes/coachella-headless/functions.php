@@ -48,7 +48,7 @@
   /**
    * Register a preview route for posts
   */
-  register_rest_route('coachella-headless', '/post/preview', [
+  register_rest_route('coachella-headless/v1', '/post/preview', [
     'methods'  => 'GET',
     'callback' => 'rest_get_post_preview',
     'args' => [
