@@ -558,15 +558,15 @@
         },
         {
             "name": "wpackagist-plugin/ilab-media-tools",
-            "version": "2.1.21",
+            "version": "2.1.23",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/ilab-media-tools/",
-                "reference": "tags/2.1.21"
+                "reference": "tags/2.1.23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/ilab-media-tools.2.1.21.zip",
+                "url": "https://downloads.wordpress.org/plugin/ilab-media-tools.2.1.23.zip",
                 "reference": null,
                 "shasum": null
             },
