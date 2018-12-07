@@ -84,7 +84,7 @@ hooks:
 # During the BeforeInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   BeforeInstall:
-    - location: scripts/install_composer.sh
+    - location: scripts/install_dependencies.sh
       timeout: 300
       runas: root
 # During the AfterInstall deployment lifecycle event, run the commands
@@ -92,7 +92,9 @@ hooks:
   AfterInstall:
     - location: scripts/run_composer.sh
       timeout: 300
-      runas: apache
+    - location: scripts/after_install_root.sh
+      timeout: 300
+      runas: root
 # During the ApplicationStart deployment lifecycle event, run the commands
 #   in the script specified in "location".
   ApplicationStart:
