@@ -1,3 +1,3 @@
 #!/bin/bash -xe
 
-composer install -d "/var/www/wordpress/coachella"
+COMPOSER_HOME="/var/cache/composer" composer install -d "/var/www/wordpress/coachella"
