@@ -17,6 +17,7 @@ if [ ! -d "$wp_cli_packages_path" ]; then
   chown apache:apache "$wp_cli_packages_path"
 fi
 
+export WP_CLI_PACKAGES_DIR="$wp_cli_packages_path"
 wp package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
 
 composer_home="/var/cache/composer"

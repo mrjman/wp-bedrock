@@ -9,6 +9,6 @@ cp ".env.example" ".env"
 acf_pro_key=$(aws ssm get-parameters --region us-east-1 --names coa.wp.acf_pro_key --with-decryption --query Parameters[0].Value)
 acf_pro_key=`echo $acf_pro_key | sed -e 's/^"//' -e 's/"$//'`
 
-wp dotenv set ACF_PRO_KEY $acf_pro_key --quote-double --allow-root
+wp dotenv set "ACF_PRO_KEY" "$acf_pro_key" --quote-double --allow-root
 
 COMPOSER_HOME="/var/cache/composer" composer install
