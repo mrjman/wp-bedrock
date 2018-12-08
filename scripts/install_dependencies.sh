@@ -6,7 +6,7 @@ if ! [ -x "$(command -v composer)" ]; then
   ln -s "/usr/local/bin/composer" "/usr/bin/composer"
 fi
 
-if ! [ -x "$(command -v composer)" ]; then
+if ! [ -x "$(command -v wp)" ]; then
   curl -o "/bin/wp" "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
   chmod +x "/bin/wp"
   wp package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
