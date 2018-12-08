@@ -1,4 +1,5 @@
 #!/bin/bash -xe
+export WP_CLI_PACKAGES_DIR="/var/cache/wp-cli"
 site_directory="/var/www/wordpress/coachella"
 
 cd "$site_directory"
