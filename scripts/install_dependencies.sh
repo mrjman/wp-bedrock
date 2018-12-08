@@ -14,6 +14,6 @@ fi
 
 export COMPOSER_HOME="/var/cache/composer"
 if [ ! -d "$COMPOSER_HOME" ];then
-  mkdir -p "COMPOSER_HOME"
-  chown apache:apache "COMPOSER_HOME"
+  mkdir -p "$COMPOSER_HOME"
+  chown apache:apache "$COMPOSER_HOME"
 fi
