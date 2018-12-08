@@ -1,3 +1,3 @@
 #!/bin/bash -xe
 
-chown apache:apache "/var/www/wordpress/coachella/*"
+chown -R apache:apache "/var/www/wordpress/coachella"
