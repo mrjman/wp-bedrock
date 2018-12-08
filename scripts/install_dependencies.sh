@@ -12,7 +12,8 @@ if ! [ -x "$(command -v composer)" ]; then
   wp package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
 fi
 
-if [ ! -d "/var/cache/composer" ];then
-  mkdir -p "/var/cache/composer"
-  chown apache:apache "/var/cache/composer"
+export COMPOSER_HOME="/var/cache/composer"
+if [ ! -d "$COMPOSER_HOME" ];then
+  mkdir -p "COMPOSER_HOME"
+  chown apache:apache "COMPOSER_HOME"
 fi
