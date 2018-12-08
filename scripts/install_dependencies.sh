@@ -11,10 +11,10 @@ if ! [ -x "$(command -v wp)" ]; then
   chmod +x "/bin/wp"
 fi
 
-$wp_cli_packages_path="/var/cache/wp-cli"
+wp_cli_packages_path="/var/cache/wp-cli"
 if [ ! -d "$wp_cli_packages_path" ]; then
   mkdir -p "$wp_cli_packages_path"
-  chown apache:apache "$$wp_cli_packages_path"
+  chown apache:apache "$wp_cli_packages_path"
 fi
 
 wp package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
