@@ -75,7 +75,6 @@ if ! $(wp core is-installed); then
   wp rewrite structure "/%postname%/" --hard
 
   # set additional options
-  wp option update blog_public "0"
   wp option update uploads_use_yearmonth_folders "0"
   wp option update default_comment_status "closed"
   wp option update default_ping_status "closed"
@@ -83,6 +82,7 @@ if ! $(wp core is-installed); then
   wp option update ilab-media-tool-enabled-storage "1"
   wp option update ilab-media-s3-delete-uploads "on"
   wp option update ilab-media-s3-display-s3-badge "on"
+  wp option update blog_public "0"
 
   if [ -n "$uploads_cdn_url" ]; then
     wp option update ilab-media-s3-cdn-base "$uploads_cdn_url"
