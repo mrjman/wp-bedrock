@@ -34,6 +34,9 @@ uploads_access_key_id=$(aws ssm get-parameters --region us-east-1 --names "/coa/
 uploads_access_key_secret=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/uploads/access_key_secret" --with-decryption --query Parameters[0].Value --output text)
 uploads_bucket=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/uploads/bucket" --with-decryption --query Parameters[0].Value --output text)
 uploads_cdn_url=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/uploads/cdn_url" --with-decryption --query Parameters[0].Value --output text)
+admin_username=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/admin/username" --with-decryption --query Parameters[0].Value --output text)
+admin_password=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/admin/password" --with-decryption --query Parameters[0].Value --output text)
+admin_email=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/admin/email" --with-decryption --query Parameters[0].Value --output text)
 
 # set env variables
 wp dotenv set "WP_ENV" "$wp_environment" --quote-double
@@ -57,6 +60,10 @@ wp dotenv salts generate
 # run composer
 composer install
 
+if ! $(wp core is-installed --allow-root); then
+  wp core install --url="$url" --title="Coachella $wp_environment" --admin_user="$admin_username" --admin_password="$admin_password" --admin_email="$admin_email" --skip-email
+fi
+
 # activate theme
 wp theme activate coachella-headless
 
@@ -64,6 +71,7 @@ wp theme activate coachella-headless
 wp rewrite structure "/%postname%/" --hard
 
 # set additional options
+wp option update siteurl "$url/wp"
 wp option update blog_public "0"
 wp option update uploads_use_yearmonth_folders "0"
 wp option update default_comment_status "closed"
