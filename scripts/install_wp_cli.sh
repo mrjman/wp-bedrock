@@ -7,7 +7,7 @@ fi
 wp_cli_packages_path="/var/cache/wp-cli"
 if [ ! -d "$wp_cli_packages_path" ]; then
   mkdir -p "$wp_cli_packages_path"
-  # chown apache:apache "$wp_cli_packages_path"
+  chown -R ec2-user:ec2-user "$wp_cli_packages_path"
 fi
 
 export WP_CLI_PACKAGES_DIR="$wp_cli_packages_path"

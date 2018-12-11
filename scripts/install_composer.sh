@@ -9,5 +9,5 @@ fi
 composer_home="/var/cache/composer"
 if [ ! -d "$composer_home" ]; then
   mkdir -p "$composer_home"
-  # chown apache:apache "$composer_home"
+  chown -R ec2-user:ec2-user "$composer_home"
 fi
