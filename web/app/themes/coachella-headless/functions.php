@@ -3,7 +3,7 @@
    * Returns the URL for the front end of the site
   */
   function frontend_url() {
-    return getenv( 'COA_FRONTEND_URL' );
+    return getenv( 'FRONTEND_URL' );
   }
 
   /**
