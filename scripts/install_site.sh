@@ -11,13 +11,13 @@ env_namespace=$DEPLOYMENT_GROUP_NAME
 
 if [ $env_namespace == "production" ]; then
   wp_environment="production"
-  frontend_url = "http://coa.prod.mondorobot.com"
+  frontend_url="http://coa.prod.mondorobot.com"
 elif [ $env_namespace == "staging" ]; then
   wp_environment="staging"
-  frontend_url = "http://coa.stg.mondorobot.com"
+  frontend_url="http://coa.stg.mondorobot.com"
 else
   wp_environment="development"
-  frontend_url = "http://coa.dev.mondorobot.com"
+  frontend_url="http://coa.dev.mondorobot.com"
 fi
 
 db_name=$(aws ssm get-parameters --region us-east-1 --names "/coa/wp/$env_namespace/db/name" --with-decryption --query Parameters[0].Value --output text)
