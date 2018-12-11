@@ -24,23 +24,13 @@ os: linux
 #   may cause associated deployments to fail.
 files:
   - source: /
-    destination: /var/www/wordpress/coachella
+    destination: /tmp/coachella
 
 permissions:
-  - object: /var/www/wordpress/coachella
+  - object: /tmp/coachella
     pattern: '**'
     owner: ec2-user
     group: ec2-user
-    mode: 750
-    type:
-      - directory
-  - object: /var/www/wordpress/coachella
-    pattern: '**'
-    owner: ec2-user
-    group: ec2-user
-    mode: 640
-    type:
-      - file
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions"
 #   section here that describes special permissions to apply to the files

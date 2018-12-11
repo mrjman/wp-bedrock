@@ -1,10 +1,14 @@
 #!/bin/bash -xe
 export COMPOSER_HOME="/var/cache/composer"
 export WP_CLI_PACKAGES_DIR="/var/cache/wp-cli"
-site_directory="/var/www/wordpress/coachella"
+site_directory="/tmp/coachella"
 
 cd "$site_directory"
-touch ".env"
+
+if [ ! -f ".env" ]; then
+  touch ".env"
+fi
+
 # cp ".env.example" ".env"
 
 env_namespace=$DEPLOYMENT_GROUP_NAME

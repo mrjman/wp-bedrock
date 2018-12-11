@@ -1,6 +1,9 @@
 #!/bin/bash -xe
 
-directory="/var/www/wordpress/coachella/web"
-chown -R apache:apache "$directory"
-find "$directory" -type d -exec chmod 750 {} \;
-find "$directory" -type f -exec chmod 640 {} \;
+tmp_directory="/tmp/coachella"
+site_directory="/var/www/wordpress/coachella"
+
+mv "$tmp_directory" "$site_directory"
+chown -R apache:apache "$site_directory"
+find "$site_directory" -type d -exec chmod 750 {} \;
+find "$site_directory" -type f -exec chmod 640 {} \;
