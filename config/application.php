@@ -37,6 +37,13 @@ if (file_exists($root_dir . '/.env')) {
 define('WP_ENV', env('WP_ENV') ?: 'production');
 
 /**
+ * Setup HTTPS setting when proxy sets forwarded header as https
+ */
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+ $_SERVER['HTTPS']='on';
+}
+
+/**
  * URLs
  */
 Config::define('WP_HOME', env('WP_HOME'));
