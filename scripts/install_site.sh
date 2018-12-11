@@ -72,3 +72,6 @@ wp option update ilab-media-s3-display-s3-badge "on"
 if [ -n "$uploads_cdn_url" ]; then
   wp option update ilab-media-s3-cdn-base "$uploads_cdn_url"
 fi
+
+# find "$site_directory" -type d -exec chmod 750 {} \;
+# find "$site_directory" -type f -exec chmod 640 {} \;
