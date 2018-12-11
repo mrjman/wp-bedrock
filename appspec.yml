@@ -29,15 +29,15 @@ files:
 permissions:
   - object: /var/www/wordpress/coachella
     pattern: '**'
-    owner: apache
-    group: apache
+    owner: ec2-user
+    group: ec2-user
     mode: 750
     type:
       - directory
   - object: /var/www/wordpress/coachella
     pattern: '**'
-    owner: apache
-    group: apache
+    owner: ec2-user
+    group: ec2-user
     mode: 640
     type:
       - file
@@ -112,6 +112,9 @@ hooks:
     - location: scripts/install_site.sh
       timeout: 300
       runas: ec2-user
+    - location: scripts/after_install_root.sh
+      timout: 300
+      runas: root
 # During the ApplicationStart deployment lifecycle event, run the commands
 #   in the script specified in "location".
   ApplicationStart:
