@@ -84,13 +84,16 @@ hooks:
 # During the BeforeInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   BeforeInstall:
-    - location: scripts/install_dependencies.sh
+    - location: scripts/install_composer.sh
+      timeout: 300
+      runas: root
+    - location: scripts/install_wp_cli.sh
       timeout: 300
       runas: root
 # During the AfterInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   AfterInstall:
-    - location: scripts/run_composer.sh
+    - location: scripts/install_site.sh
       timeout: 300
     - location: scripts/after_install_root.sh
       timeout: 300
