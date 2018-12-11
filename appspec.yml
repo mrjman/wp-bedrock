@@ -25,6 +25,22 @@ os: linux
 files:
   - source: /
     destination: /var/www/wordpress/coachella
+
+permissions:
+  - object: /var/www/wordpress/coachella
+    pattern: **
+    owner: apache
+    group: apache
+    mode: 750
+    type:
+      - directory
+  - object: /var/www/wordpress/coachella
+    pattern: **
+    owner: apache
+    group: apache
+    mode: 640
+    type:
+      - file
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions"
 #   section here that describes special permissions to apply to the files
@@ -95,9 +111,7 @@ hooks:
   AfterInstall:
     - location: scripts/install_site.sh
       timeout: 300
-    - location: scripts/after_install_root.sh
-      timeout: 300
-      runas: root
+      runas: ec2-user
 # During the ApplicationStart deployment lifecycle event, run the commands
 #   in the script specified in "location".
   ApplicationStart:
