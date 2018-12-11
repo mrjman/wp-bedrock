@@ -39,8 +39,8 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 /**
  * Setup HTTPS setting when proxy sets forwarded header as https
  */
-if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
- $_SERVER['HTTPS']='on';
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+  $_SERVER['HTTPS']='on';
 }
 
 /**
