@@ -25,12 +25,6 @@ os: linux
 files:
   - source: /
     destination: /tmp/coachella
-
-permissions:
-  - object: /tmp/coachella
-    pattern: '**'
-    owner: ec2-user
-    group: ec2-user
 # For deployments to Amazon Linux, Ubuntu Server, or RHEL instances,
 #   you can specify a "permissions"
 #   section here that describes special permissions to apply to the files
@@ -99,6 +93,9 @@ hooks:
 # During the AfterInstall deployment lifecycle event, run the commands
 #   in the script specified in "location".
   AfterInstall:
+    - location: scripts/change_permissions.sh
+      timemout: 300
+      runas: root
     - location: scripts/install_site.sh
       timeout: 300
       runas: ec2-user
