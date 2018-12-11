@@ -1,1 +1,2 @@
 path: web/wp
+apache_modules: [mod_rewrite]
