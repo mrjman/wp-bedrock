@@ -45,7 +45,7 @@ wp dotenv set "DB_USER" "$db_user" --quote-double
 wp dotenv set "DB_PASSWORD" "$db_password" --quote-double
 wp dotenv set "DB_HOST" "$db_host" --quote-double
 wp dotenv set "WP_HOME" "$url" --quote-double
-wp dotenv set "WP_SITEURL" "${WP_HOME}/wp" --quote-double
+wp dotenv set "WP_SITEURL" "\${WP_HOME}/wp" --quote-double
 wp dotenv set "ACF_PRO_KEY" "$acf_pro_key" --quote-double
 wp dotenv set "ILAB_CLOUD_STORAGE_PROVIDER" "s3" --quote-double
 wp dotenv set "ILAB_AWS_S3_ACCESS_KEY" "$uploads_access_key_id" --quote-double
@@ -60,30 +60,31 @@ wp dotenv salts generate
 # run composer
 composer install
 
-if ! $(wp core is-installed --allow-root); then
+if ! $(wp core is-installed); then
   wp core install --url="$url" --title="Coachella $wp_environment" --admin_user="$admin_username" --admin_password="$admin_password" --admin_email="$admin_email" --skip-email
+
+  # activate theme
+  wp theme activate coachella-headless
+
+  # activate plugins
+  for plugin in $(wp plugin list --status=inactive --field=name); do
+    wp plugin activate "$plugin"
+  done
+
+  # set permalink structure
+  wp rewrite structure "/%postname%/" --hard
+
+  # set additional options
+  wp option update blog_public "0"
+  wp option update uploads_use_yearmonth_folders "0"
+  wp option update default_comment_status "closed"
+  wp option update default_ping_status "closed"
+  wp option update default_pingback_flag "0"
+  wp option update ilab-media-tool-enabled-storage "1"
+  wp option update ilab-media-s3-delete-uploads "on"
+  wp option update ilab-media-s3-display-s3-badge "on"
+
+  if [ -n "$uploads_cdn_url" ]; then
+    wp option update ilab-media-s3-cdn-base "$uploads_cdn_url"
+  fi
 fi
-
-# activate theme
-wp theme activate coachella-headless
-
-# set permalink structure
-wp rewrite structure "/%postname%/" --hard
-
-# set additional options
-wp option update siteurl "$url/wp"
-wp option update blog_public "0"
-wp option update uploads_use_yearmonth_folders "0"
-wp option update default_comment_status "closed"
-wp option update default_ping_status "closed"
-wp option update default_pingback_flag "0"
-wp option update ilab-media-tool-enabled-storage "1"
-wp option update ilab-media-s3-delete-uploads "on"
-wp option update ilab-media-s3-display-s3-badge "on"
-
-if [ -n "$uploads_cdn_url" ]; then
-  wp option update ilab-media-s3-cdn-base "$uploads_cdn_url"
-fi
-
-# find "$site_directory" -type d -exec chmod 750 {} \;
-# find "$site_directory" -type f -exec chmod 640 {} \;
