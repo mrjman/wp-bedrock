@@ -28,14 +28,14 @@ files:
 
 permissions:
   - object: /var/www/wordpress/coachella
-    pattern: **
+    pattern: '**'
     owner: apache
     group: apache
     mode: 750
     type:
       - directory
   - object: /var/www/wordpress/coachella
-    pattern: **
+    pattern: '**'
     owner: apache
     group: apache
     mode: 640
