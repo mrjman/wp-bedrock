@@ -47,13 +47,6 @@ wp dotenv set "DB_HOST" "$db_host" --quote-double
 wp dotenv set "WP_HOME" "$url" --quote-double
 wp dotenv set "WP_SITEURL" "\${WP_HOME}/wp" --quote-double
 wp dotenv set "ACF_PRO_KEY" "$acf_pro_key" --quote-double
-wp dotenv set "ILAB_CLOUD_STORAGE_PROVIDER" "s3" --quote-double
-wp dotenv set "ILAB_AWS_S3_ACCESS_KEY" "$uploads_access_key_id" --quote-double
-wp dotenv set "ILAB_AWS_S3_ACCESS_SECRET" "$uploads_access_key_secret" --quote-double
-wp dotenv set "ILAB_AWS_S3_BUCKET" "$uploads_bucket" --quote-double
-wp dotenv set "ILAB_AWS_S3_REGION" "us-east-1" --quote-double
-wp dotenv set "ILAB_MEDIA_S3_PREFIX" "uploads" --quote-double
-wp dotenv set "ILAB_AWS_S3_CACHE_CONTROL" "public,max-age=2592000" --quote-double
 wp dotenv set "FRONTEND_URL" "$frontend_url" --quote-double
 wp dotenv salts generate
 
@@ -84,7 +77,18 @@ if ! $(wp core is-installed); then
   wp option update ilab-media-s3-display-s3-badge "on"
   wp option update blog_public "0"
 
+  # set media cloud options
+  wp option update ilab-media-s3-access-key "$uploads_access_key_id"
+  wp option update ilab-media-s3-bucket "$uploads_bucket"
+  wp option update ilab-media-s3-cache-control "public,max-age=2592000"
   if [ -n "$uploads_cdn_url" ]; then
     wp option update ilab-media-s3-cdn-base "$uploads_cdn_url"
   fi
+  wp option update ilab-media-s3-delete-uploads "on"
+  wp option update ilab-media-s3-display-s3-badge "on"
+  wp option update ilab-media-s3-prefix "uploads"
+  wp option update ilab-media-s3-region "us-east-1"
+  wp option update ilab-media-s3-secret "$uploads_access_key_secret"
+  wp option update ilab-media-storage-provider "s3"
+  wp option update ilab-media-tool-enabled-storage "1"
 fi
