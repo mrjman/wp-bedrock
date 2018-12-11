@@ -9,11 +9,11 @@ Deny from all
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
-RewriteRule ^wp-admin/includes/ - [F,L]
-RewriteRule !^wp-includes/ - [S=3]
-RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
-RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
-RewriteRule ^wp-includes/theme-compat/ - [F,L]
+RewriteRule ^wp/wp-admin/includes/ - [F,L]
+RewriteRule !^wp/wp-includes/ - [S=3]
+RewriteRule ^wp/wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp/wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp/wp-includes/theme-compat/ - [F,L]
 </IfModule>
 # END Block wp-includes scripts
 
