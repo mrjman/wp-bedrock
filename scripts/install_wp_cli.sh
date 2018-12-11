@@ -5,7 +5,6 @@ if ! [ -x "$(command -v wp)" ]; then
 fi
 
 wp_cli_packages_path="/var/cache/wp-cli"
-wp_cli_packages_path="cache/wp-cli"
 if [ ! -d "$wp_cli_packages_path" ]; then
   mkdir -p "$wp_cli_packages_path"
   # chown apache:apache "$wp_cli_packages_path"
