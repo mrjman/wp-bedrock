@@ -13,5 +13,5 @@ fi
 export WP_CLI_PACKAGES_DIR="$wp_cli_packages_path"
 
 if ! wp package path "aaemnnosttv/wp-cli-dotenv-command" --allow-root; then
-  wp package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
+  php -d memory_limit=512M "$(which wp)" package install "aaemnnosttv/wp-cli-dotenv-command:^1.0" --allow-root
 fi
