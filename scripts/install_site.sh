@@ -75,7 +75,10 @@ if ! $(wp core is-installed); then
   wp option update ilab-media-tool-enabled-storage "1"
   wp option update ilab-media-s3-delete-uploads "on"
   wp option update ilab-media-s3-display-s3-badge "on"
-  wp option update blog_public "0"
+
+  # updat does not seem to work so trying set instead
+  # wp option update blog_public "0"
+  wp option set blog_public "0"
 
   # set media cloud options
   wp option update ilab-media-s3-access-key "$uploads_access_key_id"
