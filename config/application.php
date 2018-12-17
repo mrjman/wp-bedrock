@@ -27,7 +27,7 @@ Env::init();
 $dotenv = new Dotenv\Dotenv($root_dir);
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
-    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'WP_HOME', 'WP_SITEURL']);
+    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
 }
 
 /**
@@ -46,15 +46,30 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARD
 /**
  * URLs
  */
-Config::define('WP_HOME', env('WP_HOME'));
-Config::define('WP_SITEURL', env('WP_SITEURL'));
+if (isset($_SERVER['HTTP_HOST'])) {
+    Config::define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
+    Config::define('WP_SITEURL', Config::get('WP_HOME') . '/wp');
+
+    /**
+     * Custom Content Directory
+     */
+    Config::define('CONTENT_DIR', '/app');
+    Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
+    Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
+}
+
+/**
+ * URLs
+ */
+// Config::define('WP_HOME', env('WP_HOME'));
+// Config::define('WP_SITEURL', env('WP_SITEURL'));
 
 /**
  * Custom Content Directory
  */
-Config::define('CONTENT_DIR', '/app');
-Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
-Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
+// Config::define('CONTENT_DIR', '/app');
+// Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
+// Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
 /**
  * DB settings

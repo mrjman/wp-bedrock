@@ -44,8 +44,8 @@ wp dotenv set "DB_NAME" "$db_name" --quote-double
 wp dotenv set "DB_USER" "$db_user" --quote-double
 wp dotenv set "DB_PASSWORD" "$db_password" --quote-double
 wp dotenv set "DB_HOST" "$db_host" --quote-double
-wp dotenv set "WP_HOME" "http://\$_SERVER['HTTP_HOST']" --quote-double
-wp dotenv set "WP_SITEURL" "\${WP_HOME}/wp" --quote-double
+# wp dotenv set "WP_HOME" "$url" --quote-double
+# wp dotenv set "WP_SITEURL" "\${WP_HOME}/wp" --quote-double
 wp dotenv set "ACF_PRO_KEY" "$acf_pro_key" --quote-double
 wp dotenv set "FRONTEND_URL" "$frontend_url" --quote-double
 wp dotenv salts generate
@@ -54,7 +54,7 @@ wp dotenv salts generate
 composer install
 
 if ! $(wp core is-installed); then
-  wp core install --url="$url" --title="Coachella $wp_environment" --admin_user="$admin_username" --admin_password="$admin_password" --admin_email="$admin_email" --skip-email
+  wp core install --title="Coachella $wp_environment" --admin_user="$admin_username" --admin_password="$admin_password" --admin_email="$admin_email" --skip-email
 
   # activate theme
   wp theme activate coachella-headless
